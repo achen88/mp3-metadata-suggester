@@ -22,8 +22,9 @@ class Searcher:
     out = ""
     try:
       res = self.sp.search(q=query).tracks.items[0]
-      out = ', '.join(res.artists) + ' - ' + res.name
+      artists = [str(artist) for artist in res.artists]
+      out = ', '.join(artists) + ' - ' + res.name
     except:
-      out = "**could not find song"
+      out = "** could not find song"
     return out
 
