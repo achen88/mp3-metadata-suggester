@@ -18,7 +18,7 @@ class Searcher:
 
   def search(self, raw):
     # do some manipulation on raw
-    query = raw
+    query = self.filter(raw)
     out = ""
     try:
       res = self.sp.search(q=query).tracks.items[0]
@@ -28,3 +28,13 @@ class Searcher:
       out = "** could not find song"
     return out
 
+  def filter(self, raw):
+    def parenrepl(matchobj):
+      if matchobj and re.search('remix', matchobj.group(), re.IGNORECASE):
+        return matchobj.group()
+      return ''
+    raw = re.sub('&', '', raw)
+    raw = re.sub('[\(\[].*[\)\]]', parenrepl, raw)
+    raw = re.sub('((ft\.)|(feat\.)|(featuring)).*-', '', raw, flags=re.IGNORECASE)
+    raw = re.sub('((ft\.)|(feat\.)|(featuring)).*$', '', raw, flags=re.IGNORECASE)
+    return raw
