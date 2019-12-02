@@ -16,9 +16,11 @@ class Searcher:
     auth = ClientCredentialsFlow(**res)
     self.sp = Spotify(auth)
 
-  def search(self, raw):
+  def search(self, raw, filter=False):
     # do some manipulation on raw
-    query = self.filter(raw)
+    query = raw
+    if filter: 
+      query = self.filter(query)
     out = ""
     try:
       res = self.sp.search(q=query).tracks.items[0]
