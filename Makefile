@@ -1,4 +1,4 @@
-.PHONY: help install clean test
+.PHONY: help install clean test shell
 include .env
 export
 
@@ -25,6 +25,9 @@ $(VENV_NAME)/bin/activate: requirements.txt
     test -d venv || virtualenv venv
     . venv/bin/activate; ${PYTHON} -m pip install -Ur requirements.txt
     touch venv/bin/activate
+
+shell:
+    ${PYTHON} -m shell
 
 test: venv
     ${PYTHON} -m test
