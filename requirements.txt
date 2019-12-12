@@ -1,1 +1,2 @@
+mutagen==1.43.0
 simple-spotify==0.1.4

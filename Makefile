@@ -27,7 +27,7 @@ $(VENV_NAME)/bin/activate: requirements.txt
     touch venv/bin/activate
 
 shell:
-    ${PYTHON} -m shell
+    ${PYTHON} -m shell $(DIR)
 
 test: venv
     ${PYTHON} -m test
