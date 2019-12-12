@@ -6,7 +6,12 @@ total = 0
 failures = 0
 for line in f:
   total += 1
-  res = searcher.search(line[:-1], filter=True)
-  if res == '** could not find song': failures += 1
+  res = ''
+  try:
+    artists, name = next(searcher.search(line[:-1], filter=True))
+    res = ', '.join(artists) + ' - ' + name
+  except:
+    res = '** could not find song'
+    failures += 1
   print(line, res)
 print('score: ' + str(total-failures) + '/' + str(total))

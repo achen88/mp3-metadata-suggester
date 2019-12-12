@@ -21,19 +21,13 @@ class Searcher:
     query = raw
     if filter: 
       query = self.filter(query)
-    out = ""
     try:
       res = self.sp.search(q=query).tracks.items[:4]
       artists = [[str(artist) for artist in res[i].artists] for i in range(len(res))]
-      if filter:
-        out = ', '.join(artists[0]) + ' - ' + res[0].name
-        return out
-      else:
-        names = [obj.name for obj in res]
-        return zip(names, artists)
+      names = [obj.name for obj in res]
+      return zip(artists, names)
     except:
-      out = "** could not find song"
-      return out
+      raise ValueError("song not found")
 
   def filter(self, raw):
     def parenrepl(matchobj):
