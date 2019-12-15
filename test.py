@@ -8,7 +8,7 @@ for line in f:
   total += 1
   res = ''
   try:
-    artists, name = next(searcher.search(line[:-1], filter=True))
+    artists, name = searcher.search(line[:-1], filter=True)[0]
     res = ', '.join(artists) + ' - ' + name
   except:
     res = '** could not find song'

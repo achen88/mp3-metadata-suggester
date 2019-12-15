@@ -25,7 +25,7 @@ class Searcher:
       res = self.sp.search(q=query).tracks.items[:4]
       artists = [[str(artist) for artist in res[i].artists] for i in range(len(res))]
       names = [obj.name for obj in res]
-      return zip(artists, names)
+      return list(zip(artists, names))
     except:
       raise ValueError("song not found")
 
