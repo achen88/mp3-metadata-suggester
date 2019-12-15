@@ -1,4 +1,4 @@
-.PHONY: help install clean test shell
+.PHONY: help install clean test run
 include .env
 export
 
@@ -12,6 +12,8 @@ help:
     @echo "       install dependencies"
     @echo "make test"
     @echo "       run test script"
+    @echo "make run DIR={songs directory}"
+    @echo "       run song labeler on songs in DIR"
     @echo "make clean"
     @echo "       clean up directory"
 
@@ -26,7 +28,7 @@ $(VENV_NAME)/bin/activate: requirements.txt
     . venv/bin/activate; ${PYTHON} -m pip install -Ur requirements.txt
     touch venv/bin/activate
 
-shell:
+run:
     ${PYTHON} -m shell $(DIR)
 
 test: venv
