@@ -13,7 +13,7 @@ class Searcher:
       exit(-1)
 
     res = ClientCredentialsFlow.token_request(clientId, clientSecret)
-    auth = ClientCredentialsFlow(**res)
+    auth = ClientCredentialsFlow(**res, scope="user-read-private")
     self.sp = Spotify(auth)
 
   def search(self, raw, filter=False):
