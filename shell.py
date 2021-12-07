@@ -23,12 +23,12 @@ def main():
     print("ERR: include directory source, DIR=...")
     exit(-1)
   filenames = os.listdir(sys.argv[1])
-  filepaths = list(map(lambda x:sys.argv[1] + "/" + x, filenames))
+  filepaths = list(filter(lambda x: x.endswith(".mp3"), map(lambda x:sys.argv[1] + "/" + x, filenames)))
   for i, filepath in enumerate(filepaths):
     print("Labeling:")
-    print("  " + filenames[i])
+    print("  " + filepath[filepath.rfind("/")+1:])
     print()
-    artist, title = match_name(searcher, filenames[i][:-4], infer=True)
+    artist, title = match_name(searcher, filepath[filepath.rfind("/")+1:-4], infer=True)
     audio = EasyID3(filepath)
     audio["artist"] = artist
     audio["title"] = title
